@@ -8,11 +8,11 @@ phases:
       - docker build -t votingapp_vote vote
       - docker build -t votingapp_worker worker
       - docker build -t votingapp_result result
-      - docker tag votingapp_vote $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_vote:$CODEBUILD_SOURCE_VERSION
-      - docker tag votingapp_worker $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_worker:$CODEBUILD_SOURCE_VERSION
-      - docker tag votingapp_result $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_result:$CODEBUILD_SOURCE_VERSION
+      - docker tag votingapp_vote $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_vote:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker tag votingapp_worker $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_worker:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker tag votingapp_result $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_result:$CODEBUILD_RESOLVED_SOURCE_VERSION
   post_build:
     commands:
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_vote:$CODEBUILD_SOURCE_VERSION
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_worker:$CODEBUILD_SOURCE_VERSION
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_result:$CODEBUILD_SOURCE_VERSION
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_vote:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_worker:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_result:$CODEBUILD_RESOLVED_SOURCE_VERSION

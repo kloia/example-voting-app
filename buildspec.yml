@@ -1,0 +1,20 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - CUSTOM_TAG=$(date +%s)
+      - docker build -t dockersamples/votingapp_vote:$CUSTOM_TAG vote
+      - docker build -t dockersamples/votingapp_worker:$CUSTOM_TAG worker
+      - docker build -t dockersamples/votingapp_result:$CUSTOM_TAG result
+      - docker tag dockersamples/votingapp_vote:$CUSTOM_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_vote:$CUSTOM_TAG
+      - docker tag dockersamples/votingapp_worker:$CUSTOM_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_worker:$CUSTOM_TAG
+      - docker tag dockersamples/votingapp_result:$CUSTOM_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_result:$CUSTOM_TAG
+  post_build:
+    commands:
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_vote:$CUSTOM_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_worker:$CUSTOM_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/votingapp_result:$CUSTOM_TAG
+

@@ -3,6 +3,7 @@ phases:
   build:
     commands:
       - aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name voting --kubeconfig ~/.kube/config
+
       - helm upgrade --install externaldns stable/external-dns --namespace externaldns --set rbac.create=true --set logLevel=debug --set image.tag=v0.5.12 --set txtOwnerId="voting"
       - kubectl apply -f k8s-specifications/namespace.yaml
 
@@ -11,8 +12,3 @@ phases:
       - sed -i "s/{{tag}}/$CODEBUILD_RESOLVED_SOURCE_VERSION/g" k8s-specifications/result-deployment.yaml
 
       - kubectl apply -f k8s-specifications/
-
-      #
-      # - kubectl -n vote set image deployment/vote result=$AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/votingapp_vote:$CODEBUILD_SOURCE_VERSION
-      # - kubectl -n vote set image deployment/worker result=$AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/votingapp_worker:$CODEBUILD_SOURCE_VERSION
-      # - kubectl -n vote set image deployment/result result=$AWS_ACCOUNT_ID.dkr.ecr.eu-west-1.amazonaws.com/votingapp_result:$CODEBUILD_SOURCE_VERSION

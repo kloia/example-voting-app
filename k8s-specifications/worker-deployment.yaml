@@ -11,7 +11,8 @@ spec:
         app: worker
     spec:
       containers:
-      - image: 417732881703.dkr.ecr.eu-west-1.amazonaws.com/votingapp_worker:latest
+      - image: {{image}}
         name: worker
+        imagePullPolicy: Always
       imagePullSecrets:
       - name: aws-registry

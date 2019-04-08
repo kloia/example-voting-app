@@ -11,7 +11,8 @@ spec:
         app: vote
     spec:
       containers:
-      - image: 417732881703.dkr.ecr.eu-west-1.amazonaws.com/votingapp_vote:latest
+      - image: {{image}}
         name: vote
+        imagePullPolicy: Always
       imagePullSecrets:
       - name: aws-registry

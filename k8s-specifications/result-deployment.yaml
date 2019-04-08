@@ -11,7 +11,7 @@ spec:
         app: result
     spec:
       containers:
-      - image: {{image}}
+      - image: 417732881703.dkr.ecr.eu-west-1.amazonaws.com/votingapp_result:{{tag}}
         name: result
         imagePullPolicy: Always
       imagePullSecrets:

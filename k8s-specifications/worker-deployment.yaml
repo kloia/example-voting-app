@@ -11,7 +11,7 @@ spec:
         app: worker
     spec:
       containers:
-      - image: {{image}}
+      - image: 417732881703.dkr.ecr.eu-west-1.amazonaws.com/votingapp_worker:{{tag}}
         name: worker
         imagePullPolicy: Always
       imagePullSecrets:

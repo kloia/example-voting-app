@@ -11,5 +11,7 @@ spec:
         app: vote
     spec:
       containers:
-      - image: dockersamples/examplevotingapp_vote:before
+      - image: 417732881703.dkr.ecr.eu-west-1.amazonaws.com/votingapp_vote:latest
         name: vote
+      imagePullSecrets:
+      - name: aws-registry

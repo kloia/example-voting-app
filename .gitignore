@@ -3,3 +3,5 @@ project.lock.json
 bin/
 obj/
 .vs/
+
+.DS_Store
